@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout::layout(~{::.container})}">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+  <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/bootstrap/css/datatables.bootstrap.min.css}">
+</head>
+<body>
+
+<div class="container" style="width:100%">
+  <center><h4 style="color: red; position: center">Wykaz konsol</h4></center>
+  <p><a href="#" class="btn btn-success" id="add"><span class="fa fa-plus-circle" aria-hidden="true"></span> Dodaj konsolę</a></p>
+  <table class="table table-striped" style="width: 100%" id="glowna">
+    <thead>
+    <tr>
+      <th>Lp. </th>
+      <th>Nazwa profilu </th>
+      <th>Nr OST </th>
+      <th>Nr kolejki</th>
+      <th> Unlock code</th>
+<!--      <th>Data wydania</th>-->
+    </tr>
+    </thead>
+
+  </table>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Szczegóły</h4>
+        </div>
+        <div class="modal-body">
+          <!--                    <div class="productName"><p>Nazwa sprzętu/artykułu: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="productDesc"><p>Dodatkowe informacje dot. sprzętu: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="branchFullName"><p>Lokalizacja: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="branchRoomName"><p>Pomieszczenie: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="fullName"><p>Przypisana osoba: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="trustmenName"><p>Rodzaj własności: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="trustmentDesc"><p>Własność: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="contractName"><p>Nr umowy: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="contractNrEzd"><p>Liczba z EZD: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="articleQueantity"><p>Ilość: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="productPrice"><p>Wartość: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="serialInvoice"><p>Nr inwentarzowy: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="serialNr"><p>Nr seryjny: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="producer"><p>Producent: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="articlePurchase"><p>Data zakupu: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+          <!--                    <div class="quarantiePerion"><p>Data końca gwarancji: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="add_modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Dodawanie konsoli</h4>
+<!--          <h8 style="color: red">UWAGA: obowiązkowo wypełnij pola oznaczone *</h8>-->
+        </div>
+        <div class="modal-body">
+          <form class="form" style="margin: auto" th:object="${console}" th:action="@{/managment/add_console}" method="post">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <div class="col-sm-6">
+                  <label style="color: red">Numer OST*</label>
+                  <input type="text" class="form-control" th:field="*{ostNr}" required>
+                </div>
+                <div class="col-sm-6">
+                  <label style="color: red">Nazwa profilu*</label>
+                  <input type="text" class="form-control" th:field="*{profileName}" required>
+                </div>
+                <div class="col-sm">
+                  <label>Kolejka</label>
+                  <input type="text" class="form-control" th:field="*{queueIndex}">
+                </div>
+                <div class="col-sm-6">
+                  <label>Kod awaryjnego odblokowania</label>
+                  <input type="text" class="form-control" th:field="*{emergencyUnlockCode}">
+                </div>
+<!--                <div class="col-sm-6">-->
+<!--                  <label>Login ST CPR</label>-->
+<!--                  <input type="text" class="form-control" th:field="*{loginStcpr}">-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <div class="col-sm">-->
+<!--                  <label>Status konta</label>-->
+<!--                  <select class="form-control" id="account_status" style="width:100%"></select>-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <div class="col-sm">-->
+<!--                  <label style="color: red">Zatrudniony w: * </label>-->
+<!--                  <select class="form-control" id="department" style="width: 100%" required></select>-->
+<!--                </div>-->
+                <!--                <div class="col-sm">-->
+                <!--                  <label>Przypisany do grupy </label>-->
+                <!--                  <select class="form-control" id="group" style="width: 100%" required></select>-->
+                <!--                </div>-->
+<!--                <div class="col-sm">-->
+<!--                  <label>Znajomość języka </label>-->
+<!--                  <select class="form-control" id="language" style="width: 100%" ></select>-->
+<!--                </div>-->
+              </div>
+              <div class="panel-footer" align="right">
+                <button class="btn btn-success" style="align: right" id="save_console"><i class="fa fa-save"></i> Zapisz</button>
+              </div>
+            </div>
+<!--            <input th:field="*{accountStatus.accountStatusId}" id="accountId" hidden>-->
+<!--            <input th:field="*{department.departmentId}" id="departmentId" hidden>-->
+<!--            <input th:field="*{language.languageId}" id="languageId" hidden>-->
+            <!--            <div class="col-sm-12" align="right">-->
+            <!--            <button class="btn btn-success" style="align: right"><i class="fa fa-save"></i> Zapisz</button>-->
+            <!--            </div>-->
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  end modal-->
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+    var table = $('#glowna').DataTable({
+    "bAutoWidth" : true,
+    "sAjaxSource" : "/register/api/console/v2",
+    "sAjaxDataProp": "",
+    "stateSave": true,
+    "aoColumns": [
+    {"mData": null, sWidth: '20px',
+           "render" : function (data, type, full, meta) {
+             return meta.index +1;
+    }},
+    {"mData" : "profileName"},
+    {"mData" : "ostNr"},
+    {"mData" : "queueIndex"},
+      {"mData" : "emergencyUnlockCode"},
+<!--    {"mData" : "releaseDate"-->
+<!--    },-->
+
+
+
+    ],
+    "columnsDefs" : [
+<!--    null,-->
+<!--    {orderSequence :['asc']},-->
+<!--    {orderSequence :['asc']},-->
+
+    ],
+
+    "language": {
+        "processing": "Przetwarzanie...",
+        "search": "Szukaj:",
+        "lengthMenu": "Pokaż _MENU_ pozycji",
+        "info": "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+        "infoEmpty": "Pozycji 0 z 0 dostępnych",
+        "infoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+        "infoPostFix": "",
+        "loadingRecords": "Wczytywanie...",
+        "zeroRecords": "Nie znaleziono pasujących pozycji",
+        "emptyTable": "Nie znaleziono rekordów",
+        "paginate": {
+          "first": "Pierwsza",
+          "previous": "Poprzednia",
+          "next": "Następna",
+          "last": "Ostatnia"
+        },
+        "aria": {
+          "sortAscending": ": aktywuj, by posortować kolumnę rosnąco",
+          "sortDescending": ": aktywuj, by posortować kolumnę malejąco"
+        }
+      }
+    });
+    table.on('order.dt search.dt', function () {
+      table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        cell.innerHTML = i + 1;
+      });
+    }).draw();
+
+    });
+    $('#add').on('click', function(){
+      $("#add_modal").modal('show');
+    });
+
+
+
+</script>

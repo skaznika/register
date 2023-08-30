@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout::layout(~{::.container})}">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+  <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/bootstrap/css/datatables.bootstrap.min.css}">
+  <link rel="stylesheet" href="/css/select2.css" th:href="@{/css/select2.css}">
+  <script th:src="@{/js/select2.js}"></script>
+  <script th:src="@{/js/i18n/pl.js}"></script>
+</head>
+<body>
+<!--<div class="wrapper">-->
+<div class="container" style="width:100%">
+  <center><h4 style="color: red; position: center">Wykaz pracowników</h4></center>
+  <p><a href="#" class="btn btn-success" id="add"><span class="fa fa-plus-circle" aria-hidden="true"></span> Dodaj pracownika</a></p>
+  <table class="table table-striped" style="width: 100%" id="glowna">
+    <thead>
+    <tr>
+      <th>Lp. </th>
+      <th>Status konta w SI CPR</th>
+      <th> Id user</th>
+      <th>Status</th>
+      <th>Nazwisko </th>
+      <th>Imię</th>
+      <th>Wydział</th>
+      <th>Login STCPR</th>
+      <th>Znajomośc języka</th>
+      <th> Akcje</th>
+    </tr>
+    </thead>
+
+  </table>
+  <!-- Modal -->
+  <div class="modal fade" id="add_modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Dodawanie osoby</h4>
+          <h8 style="color: red">UWAGA: obowiązkowo wypełnij pola oznaczone *</h8>
+        </div>
+        <div class="modal-body">
+          <form class="form" style="margin: auto" th:object="${employee}" th:action="@{/managment/add_employee}" method="post">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <div class="col-sm-6">
+                  <label style="color: red">Imię*</label>
+                  <input type="text" class="form-control" th:field="*{fName}" required>
+                </div>
+                <div class="col-sm-6">
+                  <label style="color: red">Nazwisko*</label>
+                  <input type="text" class="form-control" th:field="*{lName}" required>
+                </div>
+                <div class="col-sm">
+                  <label>Nr ONA</label>
+                  <input type="text" class="form-control" th:field="*{onaNr}">
+                </div>
+                <div class="col-sm-6">
+                  <label>Archiwalny Nr ONA</label>
+                  <input type="text" class="form-control" th:field="*{archiveOnaNr}">
+                </div>
+                <div class="col-sm-6">
+                  <label>Login ST CPR</label>
+                  <input type="text" class="form-control" th:field="*{loginStcpr}">
+                </div>
+                <br>
+                <div class="col-sm">
+                  <label>Status konta</label>
+                  <select class="form-control" id="account_status" style="width:100%"></select>
+                </div>
+                <br>
+                <div class="col-sm">
+                  <label style="color: red">Zatrudniony w: * </label>
+                  <select class="form-control" id="department" style="width: 100%" required></select>
+                </div>
+<!--                <div class="col-sm">-->
+<!--                  <label>Przypisany do grupy </label>-->
+<!--                  <select class="form-control" id="group" style="width: 100%" required></select>-->
+<!--                </div>-->
+                <div class="col-sm">
+                  <label>Znajomość języka </label>
+                  <select class="form-control" id="language" style="width: 100%" ></select>
+                </div>
+              </div>
+              <div class="panel-footer" align="right">
+                <button class="btn btn-success" style="align: right" id="save_employee"><i class="fa fa-save"></i> Zapisz</button>
+              </div>
+            </div>
+            <input th:field="*{accountStatus.accountStatusId}" id="accountId" hidden>
+            <input th:field="*{department.departmentId}" id="departmentId" hidden>
+            <input th:field="*{language.languageId}" id="languageId" hidden>
+<!--            <div class="col-sm-12" align="right">-->
+<!--            <button class="btn btn-success" style="align: right"><i class="fa fa-save"></i> Zapisz</button>-->
+<!--            </div>-->
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  end modal-->
+  <!-- Modal -->
+  <div class="modal fade" id="detail_modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Szczegóły</h4>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  end modal-->
+</div>
+<!--</div>-->
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+    var table = $('#glowna').DataTable({
+    "bAutoWidth" : true,
+    "sAjaxSource" : "/register/api/employee/v2",
+    "sAjaxDataProp": "",
+    "stateSave": true,
+    "aoColumns": [
+    {"mData": null, sWidth: '20px',
+           "render" : function (data, type, full, meta) {
+             return meta.index +1;
+    }},
+    {"mData" : "accountStatusName",
+     "render" : function(data, type, row){
+<!--            if (data == "konto zablokowane" ){-->
+            if(data === "konto zablokowane" || data === "Konto zablokowane"){
+            return '<img src="icon/off.png" style="width:15px" />&nbsp;Konto zablokowane';
+            }
+            if(data === "Konto aktywne"){
+            return '<img src="icon/on.png" style="width:15px" />&nbsp;Konto aktywne';
+            }
+            return '<img src="icon/not.jpg" style="width:15px" />&nbsp;Nie założono';
+            }
+    },
+    {"mData" : "employeeId"},
+    {"mData" : "accountStatusId"},
+    {"mData" : "lname",
+    "defaultContent": "N/N"
+    },
+    {"mData" : "fname",
+    "defaultContent": "N/N"
+    },
+    {"mData" : "departmentShortName",
+    "defaultContent": "N/N"
+    },
+    {"mData" : "loginStcpr"},
+    {"mData" : "languageName"},
+    {"mData" : null,
+    "render" : function(data, type, row){
+    var a = '<a href="#"><span style="color: blue" class="glyphicon glyphicon-pencil" title="Edycja" id="edit"></span></a>';
+<!--    console.log('status : ' + row.accountStatusName);-->
+    if (row.accountStatusId =='4' || row.accountStatusId =='1' || row.accountStatusId =='3'){
+    a=a+'&nbsp;&nbsp;&nbsp;<a href="#"><span style="color: green" class="fa fa-check" title="Odblokuj" id="unlock"></span></a>';
+    }
+    if (row.accountStatusId =='5'){
+    a=a+'&nbsp;&nbsp;&nbsp;<a href="#"><span style="color: red" class="fa fa-solid fa-lock fa-beat-fade" title="Zablokuj" id="lock"></span></a>';
+    }
+    if (row.accountStatusId =='2' || row.accountStatusId =='6'){
+    a=a+'&nbsp;&nbsp;&nbsp;<a href="#"><span style="color: orange" class="fa fa-exchange" title="Załóż" id="create"></span></a>';
+    }
+    return a;
+    }
+    },
+    ],
+    "columnsDefs" : [
+<!--    null,-->
+<!--    {orderSequence :['asc']},-->
+<!--    {orderSequence :['asc']},-->
+
+    ],
+
+    "language": {
+        "processing": "Przetwarzanie...",
+        "search": "Szukaj:",
+        "lengthMenu": "Pokaż _MENU_ pozycji",
+        "info": "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+        "infoEmpty": "Pozycji 0 z 0 dostępnych",
+        "infoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+        "infoPostFix": "",
+        "loadingRecords": "Wczytywanie...",
+        "zeroRecords": "Nie znaleziono pasujących pozycji",
+        "emptyTable": "Nie znaleziono rekordów",
+        "paginate": {
+          "first": "Pierwsza",
+          "previous": "Poprzednia",
+          "next": "Następna",
+          "last": "Ostatnia"
+        },
+        "aria": {
+          "sortAscending": ": aktywuj, by posortować kolumnę rosnąco",
+          "sortDescending": ": aktywuj, by posortować kolumnę malejąco"
+        }
+      }
+    });
+<!--    $('#add').on('click', function(){-->
+<!--    $("#add_modal").modal('show');-->
+<!--    });-->
+    table.on('order.dt search.dt', function () {
+      table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        cell.innerHTML = i + 1;
+      });
+    }).draw();
+
+<!--funkcja status konta-->
+    $(function () {
+    $("#account_status").select2({
+    language: "pl",
+<!--    tags: true,-->
+<!--    theme:'bootstrap4',-->
+    selectionCssClass: 'form-control',
+
+    ajax: {
+    url: "/register/api/account_status/v1",
+    dataType: 'json',
+    type: 'GET',
+    data: function(params) {
+    console.log(params)
+    return{
+    term: params.term,
+    page: params.page || 1,
+    }
+    },
+    processResults(data) {
+    console.log(data)
+    return{
+    results: $.map(data, function(item){
+    return {
+    text: item.accountStatusName,
+    id: item.accountStatusId
+    }
+    })
+    }
+    }
+    }
+    })
+    });
+    $("#account_status").on('change', function(){
+    $("#accountId").val($(this).val());
+    });
+<!--koniec funckji status konta-->
+
+<!--funkcja departament-->
+    $(function () {
+    $("#department").select2({
+    language: "pl",
+<!--    theme:'bootstrap4',-->
+    selectionCssClass: 'form-control',
+    ajax: {
+    url: "/register/api/department/v1",
+    dataType: 'json',
+    type: 'GET',
+    data: function(params) {
+    console.log(params)
+    return{
+    term: params.term,
+    page: params.page || 1,
+    }
+    },
+    processResults(data) {
+    console.log(data)
+    return{
+    results: $.map(data, function(item){
+    return {
+    text: item.departmentShortName,
+    id: item.departmentId
+    }
+    })
+    }
+    }
+    }
+    })
+    });
+    $("#department").on('change', function(){
+    $("#departmentId").val($(this).val());
+    });
+<!--koniec funkcji department-->
+<!--funkcja language-->
+    $(function () {
+    $("#language").select2({
+    language: "pl",
+<!--    theme:'bootstrap4',-->
+    selectionCssClass: 'form-control',
+    ajax: {
+    url: "/register/api/language/v1",
+    dataType: 'json',
+    type: 'GET',
+    data: function(params) {
+    console.log(params)
+    return{
+    term: params.term,
+    page: params.page || 1,
+    }
+    },
+    processResults(data) {
+    console.log(data)
+    return{
+    results: $.map(data, function(item){
+    return {
+    text: item.languageName,
+    id: item.languageId
+    }
+    })
+    }
+    }
+    }
+    })
+    });
+    $("#language").on('change', function(){
+    $("#languageId").val($(this).val());
+    });
+<!--koniec funckji status konta-->
+
+
+    $('#add').on('click', function(){
+    $("#add_modal").modal('show');
+    });
+    })
+
+
+</script>

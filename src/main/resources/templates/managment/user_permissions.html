@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout::layout(~{::.container})}">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+  <!--    <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/bootstrap/css/datatables.bootstrap.min.css}">-->
+</head>
+<body>
+<div class="container" style="width:100%">
+  <div class="col-sm-8">
+    <p><a href="/managment/dodaj" class="btn btn-success"><span class="glyphicon glyphicon-plus"
+                                                                aria-hidden="true"></span> Dodaj status</a>
+    </p>
+  </div>
+  <table id="glowna" class="table table-bordered table-responsive table-striped" style="width: 100%">
+    <thead>
+    <tr>
+      <th>Lp.</th>
+      <th>Nazwa statusu konta</th>
+    </tr>
+    </thead>
+  </table>
+</div>
+</body>
+</html>

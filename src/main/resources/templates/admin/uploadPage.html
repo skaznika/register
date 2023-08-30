@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout::layout(~{::.container})}">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+  <!--    <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/bootstrap/css/datatables.bootstrap.min.css}">-->
+</head>
+<body>
+<div class="container" style="width:100%">
+ <h2> Wgraj plik i zapisz w bazie danych</h2>
+  <form action = "uploadFile" method="post" enctype="multipart/form-data">
+<br /> <br />
+    Wybierz plik do wgrania :
+    <input type="file" name="file" value="Wybierz plik" /><br /> <br />
+    Naciśnij, aby wgrać plik :
+    <input type="submit" value="Wgraj" /> <br /> <br />
+    <h4 style="color: green">${message}</h4><br />
+    Chcesz zapisać dane do bazy? <a href="saveData"><b>TAK</b></a>&nbsp;&nbsp;<a href="/"><b>NIE</b></a>
+  </form>
+</div>
+</body>
+</html>

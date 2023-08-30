@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../css/uikit-min.css" th:href="@{/css/uikit.min.css}">
+    <link rel="stylesheet" href="../css/uikit.css" th:href="@{/css/uikit.css}">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../css/font-awesome.css" th:href="@{/css/font-awesome.css}">
+    <script th:src="@{/js/uikit.js}"></script>
+    <script th:src="@{/js/uikit-icons.js}"></script>
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+</head>
+
+<body>
+<div class="uk-card-default uk-card uk-card-body" style="width: 400px; margin: 300px auto">
+    <!--    <form action="/packages/login" method="POST" class="form-signin">-->
+    <form name="f" th:action="@{/login}" method="post" class="form-signin">
+        <center><h3 th:class="uk-align-center">Zaloguj się domenowo</h3>
+<!--            <h5><b style="color: red">TYLKO ADMINISTRATORZY!</b></h5>-->
+            <img src="./images/cpr_logo1.png" alt="">
+        </center>
+        <br/>
+
+        <input type="text" id="username" name="username" placeholder="Użytkownik"
+               class="form-control"/> <br/>
+        <br/>
+        <input type="password" th:placeholder="Hasło"
+               id="password" name="password" class="form-control"/> <br/>
+
+        <div align="center" th:if="${param.error}">
+            <p style="font-size: 20; color: #FF1C19;">Nazwa użytkownika lub hasło są nieprawidłowe! Sprawdź je!</p>
+        </div>
+        <br />
+        <button class="uk-button uk-button-secondary uk-width-1-1" name="Submit" value="login" type="Submit"> ZALOGUJ &nbsp;&nbsp;<i class="fa fa-unlock-alt fa-2x" style="color: red"></i></button>
+        <!--                th:text="Zaloguj">ZALOGUJ</button>-->
+
+    </form>
+</div>
+</body>
+</html>

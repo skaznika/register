@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<!--  <title>Title</title>-->
+<!--  <link rel="stylesheet" href="/admin/css/fontawesome.min.css" th:href="@{/admin/css/fontawersome.min.css}">-->
+<!--  <link rel="stylesheet" href="/admin/css/fontawesome.css" th:href="@{/admin/css/fontawersome.css}">-->
+<!--  <link rel="stylesheet" href="/admin/css/bootstrap.min.css" th:href="@{/admin/css/bootstrap.min.css}">-->
+<!--  <link rel="stylesheet" href="/admin/css/bootstrap.css" th:href="@{/admin/css/bootstrap.css}">-->
+<!--  <script th:src="@{/admin/js/fontawesome.min.js}"></script>-->
+<!--  <script th:src="@{/admin/js/bootstrap.js}"></script>-->
+
+</head>
+<body>
+<!--<nav th:fragment="navbar" class="navbar navbar-light" style="background-color: #5bc0de">-->
+<!--    <nav th:fragment="navbar" class="navbar bg-dark text-light">-->
+<!--style="background-color: #454545; color: white"-->
+<nav th:fragment="navbar" class="navbar" style="background-color: #454545; color: white">
+  <!--    style="background-color: #454545; color: white"-->
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="navbar navbar-nav">
+      <table>
+        <tr>
+          <td><center><b>Witaj </b></center></td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <b><span th:text="${session.test}" style="color: #0f7ae5">Niezalogowany</span></b>
+            </center>
+          </td>
+
+        </tr>
+        <tr>
+          <td>
+            <center>
+            </center>
+          </td>
+
+        </tr>
+
+      </table>
+    </ul>
+
+
+    <ul class="nav navbar-nav">
+      <li><a href="#" th:href="@{/index}" style="color: #357abf"><span
+              class="glyphicon glyphicon-home" style="color: #357abf"></span> Strona główna</a></li>
+    </ul>
+<!--    <ul class="nav navbar-nav" >-->
+<!--      <li class="dropdown">-->
+<!--        <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="tree"-->
+<!--           aria-expanded="false" style="color: #357abf"><span class="glyphicon glyphicon-wrench"-->
+<!--                                                              style="color: #357abf"></span> Wykaz upoważnień<span class="caret"></span></a>-->
+
+<!--        <ul class="dropdown-menu">-->
+<!--          <li><a href="/ldap" th:href="@{/up1}" style="color: #357abf"><span-->
+<!--                  class="fa fa-group"></span> Upoważnienia do przetwarzania danych osobowych w ST CPR</a></li>-->
+<!--          <li class="divider"></li>-->
+<!--          <li><a href="/email" th:href="@{/up2}" style="color: #357abf"><span-->
+<!--                  class="fa fa-envelope"></span> Upoważnienia wydane przez ŚUW </a></li>-->
+<!--        </ul>-->
+<!--      </li>-->
+<!--    </ul>-->
+    <ul class="nav navbar-nav" sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+      <li><a href="#" th:href="@{/console}" style="color: #357abf"><span
+              class="glyphicon glyphicon-home" style="color: #357abf"></span> Konsole DGT</a></li>
+    </ul>
+    <ul class="nav navbar-nav"sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+      <li><a href="#" th:href="@{/card}" style="color: #357abf"><span
+              class="glyphicon glyphicon-home" style="color: #357abf"></span> Karty dostępowe</a></li>
+    </ul>
+    <ul class="nav navbar-nav"sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+      <li><a href="#" th:href="@{/employee}" style="color: #357abf"><span
+              class="fa fa-users" style="color: #357abf"></span> Pracownicy</a></li>
+    </ul>
+    <ul class="nav navbar-nav" sec:authorize="hasAuthority('ADMIN')">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="tree"
+           aria-expanded="false" style="color: #357abf"><span class="glyphicon glyphicon-wrench"
+                                                              style="color: #357abf"></span> Biblioteki<span class="caret"></span></a>
+
+        <ul class="dropdown-menu" sec:authorize="hasAuthority('ADMIN')">
+          <li><a href="/ldap" th:href="@{/managment/account_status}" style="color: #357abf"><span
+                  class="fa fa-group"></span> Statusy kont</a></li>
+          <li class="divider"></li>
+          <li><a href="/email" th:href="@{/managment/language}" style="color: #357abf"><span
+                  class="fa fa-envelope"></span> Znajomość języków </a></li>
+          <li class="divider"></li>
+          <li><a href="/email" th:href="@{/managment/user_group}" style="color: #357abf"><span
+                  class="fa fa-envelope"></span> Grupa usera </a></li>
+          <li class="divider"></li>
+          <li><a href="/email" th:href="@{/managment/position}" style="color: #357abf"><span
+                  class="fa fa-envelope"></span> Pozycja</a></li>
+          <li class="divider"></li>
+          <li><a href="/email" th:href="@{/managment/user_permissions}" style="color: #357abf"><span
+                  class="fa fa-envelope"></span> Uprawnienia </a></li>
+          <li class="divider"></li>
+          <li><a href="/email" th:href="@{/managment/department}" style="color: #357abf"><span
+                  class="fa fa-envelope"></span> Wydział/Departament pracownika </a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav" sec:authorize="hasAuthority('ADMIN')">
+      <li><a href="#" th:href="@{/admin/new}" style="color: red"><span
+              class="fa fa-user" style="color: red"></span> Nowy user</a></li>
+    </ul>
+<!--    <ul class="nav navbar-nav">-->
+<!--      <li><a href="#" th:href="@{/admin/uploadPage}" style="color: red"><span-->
+<!--              class="fa fa-user" style="color: red"></span> Wgraj plik Excel</a></li>-->
+<!--    </ul>-->
+<!--    <ul class="nav navbar-nav" >-->
+<!--      <li class="dropdown">-->
+<!--        <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="tree"-->
+<!--           aria-expanded="false" style="color: #357abf"><span class="glyphicon glyphicon-wrench"-->
+<!--                                                              style="color: #357abf"></span>  Różne wspólne ustawienia aplikacji<span class="caret"></span></a>-->
+<!--        <ul class="dropdown-menu">-->
+<!--          <li><a href="/admin/cars" th:href="@{/cars}" style="color: #357abf"><span-->
+<!--                  class="fa fa-car"></span> Pojazdy</a></li>-->
+<!--          <li class="divider"></li>-->
+<!--          <li><a href="/admin/resources" th:href="@{/resources}" style="color: #357abf"><span-->
+<!--                  class="fa fa-cubes"></span> Zasoby</a></li>-->
+<!--          <li class="divider"></li>-->
+<!--          <li><a href="/admin/manager" th:href="@{/manager}" style="color: #357abf"><span-->
+<!--                  class="fa fa-android"></span> Kierownictwo</a></li>-->
+<!--          <li class="divider"></li>-->
+<!--          <li><a href="/admin/mailTemplate" th:href="@{/mailTemplate}" style="color: #357abf"><span-->
+<!--                  class="fa fa-clipboard"></span> Szablony e-mail</a></li>-->
+<!--        </ul>-->
+<!--      </li>-->
+<!--    </ul>-->
+    <!--         <ul class="nav navbar-nav" >-->
+    <!--             <li class="dropdown">-->
+    <!--                 <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="tree"-->
+    <!--                    aria-expanded="false" style="color: #357abf"><span class="fa fa-th-list"-->
+    <!--                                                                       style="color: #357abf"></span> Zarządzanie użytkownikami<span class="caret"></span></a>-->
+
+    <!--                 <ul class="dropdown-menu">-->
+    <!--                     <li><a href="/admin/users" th:href="@{/users}" style="color: #357abf"><span-->
+    <!--                             class="fa fa-list-ol"></span> Lista użytkowników</a></li>-->
+    <!--&lt;!&ndash;                     <li class="divider"></li>&ndash;&gt;-->
+
+    <!--                 </ul>-->
+    <!--             </li>-->
+
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--        <ul class="nav navbar-nav">-->
+    <!--            <li><a href="#" th:href="@{/message}" style="color: red"><span-->
+    <!--                    class="fa fa-whatsapp" style="color: red"></span> KOMUNIKATY</a></li>-->
+    <!--        </ul>-->
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" th:href="@{/logout}" style="color: #357abf"><span class="glyphicon glyphicon-log-out"
+                                                                        style="color: #357abf"></span> Wyloguj</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</body>
+</html>

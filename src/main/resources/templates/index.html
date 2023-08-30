@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout::layout(~{::.container})}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/bootstrap/css/datatables.bootstrap.min.css}">
+</head>
+<body>
+<div class="container" style="width:90%">
+    <center><h4 style="color: red; position: center">Wykaz upoważnień</h4></center>
+
+    <p><a href="#" class="btn btn-success"><span class="fa fa-plus-circle" aria-hidden="true"></span> Dodaj upoważnienie</a></p>
+    <table class="table table-striped" style="width: 100%" id="glowna">
+        <thead>
+        <tr>
+            <th>Lp. </th>
+            <th>Status konta</th>
+            <th>Nazwisko </th>
+            <th>Imię </th>
+            <th>Login STCPR</th>
+            <th>ONA</th>
+<!--            <th>Status konta</th>-->
+            <th>Uprawnienia ST CPR</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content -->
+            <div class="modal-content">
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Szczegóły</h4>-->
+<!--                </div>-->
+                <div class="modal-body">
+                    <div>
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div><h5><center><b> Dane podstawowe </b></center></h5></div>
+<!--                                    <div style="display: inline">-->
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="aimie" style="display: inline">Imię: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="anazwisko" style="display: inline">Nazwisko: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="loginSTCPR">Login STCPR: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="awydzial">Wydział: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="anrOna">Nr ONA: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="aarchiwalnyNrOna">Archiwalny nr ONA: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+
+
+                            </table>
+<!--                                    <div class="aimie" style="display: inline">Imię: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div>-->
+<!--                                    <div style="display: inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>-->
+<!--                                    <div class="anazwisko" style="display: inline">Nazwisko: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="loginSTCPR"><p>Login STCPR: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="awydzial"><p>Wydział: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="anrOna"><p>Nr ONA: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="aarchiwalnyNrOna"><p>Archiwalny nr ONA: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                                <div><h5><center> <b> Upoważnienia do przetwarzania i udostępniania danych w ST CPR </b></center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="bdataNadaniaUpowaznienia">Data nadania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="bnrUpowaznienia">Numer upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="bdataWaznosciUpowaznienia">Data ważności upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="buprawnienia">Uprawnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="bdataWycofaniaUpowaznienia">Data wycofania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="bpowodWycofaniaUpowaznienia">Powód wycofania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+
+<!--                                    <div class="bdataNadaniaUpowaznienia"><p>Data nadania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="bnrUpowaznienia"><p>Numer upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="bdataWaznosciUpowaznienia"><p>Data ważności upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="buprawnienia"><p>Uprawnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="bdataWycofaniaUpowaznienia"><p>Data wycofania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="bpowodWycofaniaUpowaznienia"><p>Powód wycofania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+
+                            <hr>
+                            <div><h5><center> Zobowiązanie do zachowania w poufności danych przetwarzanych w ST CPR</center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="cdataWydaniaZobowiazania">Data wydania zobowiazania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="cnrZobowiazania">Numer zobowiazania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+<!--                            <div><h4><center> Zobowiązanie do zachowania w poufności danych przetwarzanych w ST CPR</center></h4></div>-->
+<!--                                    <div class="cdataWydaniaZobowiazania"><p>Data wydania zobowiazania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                                    <div class="cnrZobowiazania"><p>Numer zobowiazania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                            <div><h5><center> Upoważnienie do przetwarzania danych osobowych w ŚUW</center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="ddataNadaniaUpowaznienia">Data nadania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="dnrUpowaznienia">Numer upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="ddataWaznosciUpowaznienia">Data ważności upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="ddataWycofaniaUpowaznienia">Data wycofania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="dpowodWycofaniaUpowaznienia">Powód wycofania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+
+<!--                            <div class="ddataNadaniaUpowaznienia"><p>Data nadania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                            <div class="dnrUpowaznienia"><p>Numer upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                            <div class="ddataWaznosciUpowaznienia"><p>Data ważności upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                            <div class="ddataWycofaniaUpowaznienia"><p>Data wycofania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                            <div class="dpowodWycofaniaUpowaznienia"><p>Powód wycofania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                            <div><h5><center> Oświadczenie o zapoznaniu się z zasadmi bezpiecznej pracy w ST CPR</center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="edataPodpisaniaUpowaznienia">Data podpisania oświadczenia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+<!--                            <div class="edataPodpisaniaUpowaznienia"><p>Data podpisania oświadczenia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                            <div><h5><center> Zobowiązanie do zachowania w poufności informacji stanowiących tajemnicę zawodową i służbową</center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="fdataPodpisaniaZobowiazania">Data podpisania zobowiązania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="fnrUpowaznienia">Numer upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                    <td><div class="fdataWaznosciUpowaznienia">Data ważności upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+<!--                            <div class="fdataPodpisaniaZobowiazania"><p>Data podpisania zobowiązania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                            <div class="fnrUpowaznienia"><p>Numer upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+<!--                            <div class="fdataWaznosciUpowaznienia"><p>Data ważności upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                            <div><h5><center> Zapoznanie się z "Polityką przetwarzania danych osobowych w ST CPR"</center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="gdataZapoznaniaPolityka">Data zapoznania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+<!--                            <div class="gdataZapoznaniaPolityka"><p>Data zapoznania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                            <div><h5><center> Szkolenie LABI z "Polityki bezpieczeństwa ST CPR"</center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="hszkolenieLabi">Data szkolenia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+<!--                            <div class="hszkolenieLabi"><p>Data szkolenia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                            <hr>
+                            <div><h5><center> Zapoznanie się z dokumentacją "Polityki bezpieczeństwa ST CPR" oraz "Instrukcją Zarządzania ST CPR" </center></h5></div>
+                            <table class="table table-striped table-bordered table-hover">
+                                <tr>
+                                    <td><div class="idataZapoznaniaPolityka">Data zapoznania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div></td>
+                                </tr>
+                            </table>
+<!--                            <div class="idataZapoznaniaPolityka"><p>Data zapoznania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    end modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="add_modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dodawanie nowego upoważnienia</h4>
+                    <!--          <h8 style="color: red">UWAGA: obowiązkowo wypełnij pola oznaczone *</h8>-->
+                </div>
+                <div class="modal-body">
+                    <form class="form" style="margin: auto" th:object="${licensing}" th:action="@{/managment/add_licence}" method="post">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-sm-6">
+                                    <label style="color: red">Wybierz osobę, której chcesz dodać upoważnienie</label>
+<!--                                    <input type="text" class="form-control" th:field="*{ostNr}" required>-->
+                                </div>
+                                <div class="col-sm-6">
+                                    <label style="color: red">Nazwa profilu*</label>
+<!--                                    <input type="text" class="form-control" th:field="*{profileName}" required>-->
+                                </div>
+                                <div class="col-sm">
+                                    <label>Kolejka</label>
+<!--                                    <input type="text" class="form-control" th:field="*{queueIndex}">-->
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Kod awaryjnego odblokowania</label>
+<!--                                    <input type="text" class="form-control" th:field="*{emergencyUnlockCode}">-->
+                                </div>
+                                <!--                <div class="col-sm-6">-->
+                                <!--                  <label>Login ST CPR</label>-->
+                                <!--                  <input type="text" class="form-control" th:field="*{loginStcpr}">-->
+                                <!--                </div>-->
+                                <!--                <br>-->
+                                <!--                <div class="col-sm">-->
+                                <!--                  <label>Status konta</label>-->
+                                <!--                  <select class="form-control" id="account_status" style="width:100%"></select>-->
+                                <!--                </div>-->
+                                <!--                <br>-->
+                                <!--                <div class="col-sm">-->
+                                <!--                  <label style="color: red">Zatrudniony w: * </label>-->
+                                <!--                  <select class="form-control" id="department" style="width: 100%" required></select>-->
+                                <!--                </div>-->
+                                <!--                <div class="col-sm">-->
+                                <!--                  <label>Przypisany do grupy </label>-->
+                                <!--                  <select class="form-control" id="group" style="width: 100%" required></select>-->
+                                <!--                </div>-->
+                                <!--                <div class="col-sm">-->
+                                <!--                  <label>Znajomość języka </label>-->
+                                <!--                  <select class="form-control" id="language" style="width: 100%" ></select>-->
+                                <!--                </div>-->
+                            </div>
+                            <div class="panel-footer" align="right">
+                                <button class="btn btn-success" style="align: right" id="save_console"><i class="fa fa-save"></i> Zapisz</button>
+                            </div>
+                        </div>
+                        <!--            <input th:field="*{accountStatus.accountStatusId}" id="accountId" hidden>-->
+                        <!--            <input th:field="*{department.departmentId}" id="departmentId" hidden>-->
+                        <!--            <input th:field="*{language.languageId}" id="languageId" hidden>-->
+                        <!--            <div class="col-sm-12" align="right">-->
+                        <!--            <button class="btn btn-success" style="align: right"><i class="fa fa-save"></i> Zapisz</button>-->
+                        <!--            </div>-->
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  end modal-->
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+    var table = $('#glowna').DataTable({
+    "bAutoWidth" : true,
+    "sAjaxSource" : "/register/api/all/v1",
+    "sAjaxDataProp": "",
+    "stateSave": true,
+    "aoColumns": [
+    {"mData": null, sWidth: '20px',
+           "render" : function (data, type, full, meta) {
+             return meta.index +1;
+    }},
+    {"mData": null,
+            sWidth: '120px',
+            "render" : function(data, type, row){
+            if (data.astatusKonta == "konto zablokowane"){
+            return '<img src="icon/off.png" style="width:15px" />&nbsp;Konto zablokowane';
+            }
+            if(data.astatusKonta == "konto aktywne") {
+            return '<img src="icon/on.png" style="width:15px" />&nbsp;Konto aktywne';
+            }
+            return '<img src="icon/not.jpg" style="width:15px" />&nbsp;Nie założono';
+            }
+            },
+    {"mData" : "anazwisko",
+<!--            "order" : 'asc'-->
+            },
+    {"mData" : "aimie"},
+    {"mData" : "loginSTCPR"},
+    {"mData" : "anrOna"},
+
+
+    {"mData" : null,
+            "render" : function(data, type, row) {
+            if (data.bdataNadaniaUpowaznienia != null || data.bnrUpowaznienia != null || data.bdataWaznosciUpowaznienia != null || data.buprawnienia != null || data.cdataWydaniaZobowiazania != null || data.cnrZobowiazania != null || data.gdataZapoznaniaPolityka != null || data.hszkolenieLabi != null) {
+            return '<center><img src="icon/ok.png" style="width:15px" /></center>';
+            } else {
+            }
+            return '<center><img src="icon/no-ok.png" style="width:15px" /></center>';
+            }
+    },
+    {"mData" : null,
+            "render" : function(data, type, row) {
+            var m = '<a href="#"><span style="color:green" class="glyphicon glyphicon-edit" title="Edytuj" id="edit"></span></a>&nbsp;&nbsp;<a href="#"><span style="color:blue" class="glyphicon glyphicon-zoom-in" title="Szczegóły" id="details"></span></a>&nbsp;&nbsp;';
+            var n='<a href="#"><span style="color:red" class="glyphicon glyphicon-trash" title="Usuń konto1" id="delete1"></span></a>&nbsp;&nbsp;';
+<!--            if (data.bdataNadaniaUpowaznienia != null || data.bnrUpowaznienia != null || data.bdataWaznosciUpowaznienia != null || data.buprawnienia != null || data.cdataWydaniaZobowiazania != null || data.cnrZobowiazania != null || data.gdataZapoznaniaPolityka != null || data.hszkolenieLabi != null || data.astatusKonta =="nie założono"){-->
+            if (data.astatusKonta =="nie założono"){
+            n='<a href="#"><span style="color:red" class="glyphicon glyphicon-screenshot" title="Załóż" id="create"></span></a>';
+            }
+<!--            else {-->
+<!--            if (data.bdataNadaniaUpowaznienia != null || data.bnrUpowaznienia != null || data.bdataWaznosciUpowaznienia != null || data.buprawnienia != null || data.cdataWydaniaZobowiazania != null || data.cnrZobowiazania != null || data.gdataZapoznaniaPolityka != null || data.hszkolenieLabi != null || data.astatusKonta =="konto aktywne"){-->
+            if (data.astatusKonta =="konto aktywne"){
+            n='<a href="#"><span style="color:red" class="glyphicon glyphicon-remove" title="Usuń" id="delete"></span></a>';
+            }
+<!--            console.log(data.astatusKonta+' '+n);-->
+<!--            else {-->
+<!--            n='<a href="#"><span style="color:red" class="glyphicon glyphicon-trash" title="Usuń konto" id="delete"></span></a>';-->
+<!--            }-->
+            return m + n;
+            }
+    },
+    ],
+    "columnsDefs" : [{
+
+    }
+    ],
+
+
+    "language": {
+        "processing": "Przetwarzanie...",
+        "search": "Szukaj:",
+        "lengthMenu": "Pokaż _MENU_ pozycji",
+        "info": "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+        "infoEmpty": "Pozycji 0 z 0 dostępnych",
+        "infoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+        "infoPostFix": "",
+        "loadingRecords": "Wczytywanie...",
+        "zeroRecords": "Nie znaleziono pasujących pozycji",
+        "emptyTable": "Nie znaleziono rekordów",
+        "paginate": {
+          "first": "Pierwsza",
+          "previous": "Poprzednia",
+          "next": "Następna",
+          "last": "Ostatnia"
+        },
+        "aria": {
+          "sortAscending": ": aktywuj, by posortować kolumnę rosnąco",
+          "sortDescending": ": aktywuj, by posortować kolumnę malejąco"
+        }
+      }
+    });
+    table.on('order.dt search.dt', function () {
+      table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        cell.innerHTML = i + 1;
+      });
+      $('#glowna tbody').on('click', '#details', function () {
+      var data = table.row($(this).parents('tr')).data();
+<!--      console.log(data);-->
+       $(".modal-body div span").text("");
+         $(".aimie span").text(data["aimie"]);
+         $(".anazwisko span").text(data["anazwisko"]);
+         $(".loginSTCPR span").text(data["loginSTCPR"]);
+         $(".awydzial span").text(data["awydzial"]);
+         $(".anrOna span").text(data["anrOna"]);
+         $(".bdataNadaniaUpowaznienia span").text(data["bdataNadaniaUpowaznienia"]);
+         $(".bnrUpowaznienia span").text(data["bnrUpowaznienia"]);
+         $(".buprawnienia span").text(data["buprawnienia"]);
+         $(".bdataWaznosciUpowaznienia span").text(data["bdataWaznosciUpowaznienia"]);
+         $(".bdataWycofaniaUpowaznienia span").text(data["bdataWycofaniaUpowaznienia"]);
+         $(".bpowodWycofaniaUpowaznienia span").text(data["bpowodWycofaniaUpowaznienia"]);
+         $(".cdataWydaniaZobowiazania span").text(data["cdataWydaniaZobowiazania"]);
+         $(".cnrZobowiazania span").text(data["cnrZobowiazania"]);
+         $(".ddataNadaniaUpowaznienia span").text(data["ddataNadaniaUpowaznienia"]);
+         $(".dnrUpowaznienia span").text(data["dnrUpowaznienia"]);
+         $(".ddataWaznosciUpowaznienia span").text(data["ddataWaznosciUpowaznienia"]);
+         $(".ddataWycofaniaUpowaznienia span").text(data["ddataWycofaniaUpowaznienia"]);
+         $(".dpowodWycofaniaUpowaznienia span").text(data["dpowodWycofaniaUpowaznienia"]);
+         $(".edataPodpisaniaUpowaznienia span").text(data["edataPodpisaniaUpowaznienia"]);
+         $(".fdataPodpisaniaZobowiazania span").text(data["fdataPodpisaniaZobowiazania"]);
+         $(".fnrUpowaznienia span").text(data["fnrUpowaznienia"]);
+         $(".fdataWaznosciUpowaznienia span").text(data["fdataWaznosciUpowaznienia"]);
+         $(".gdataZapoznaniaPolityka span").text(data["gdataZapoznaniaPolityka"]);
+         $(".hszkolenieLabi span").text(data["hszkolenieLabi"]);
+         $(".idataZapoznaniaPolityka span").text(data["idataZapoznaniaPolityka"]);
+      $("#myModal").modal('show');
+      });
+    $('#glowna tbody').on('click', 'td', function () {
+      var data = table.row($(this).parents('tr')).data();
+<!--      console.log(data);-->
+       $(".modal-body div span").text("");
+         $(".aimie span").text(data["aimie"]);
+         $(".anazwisko span").text(data["anazwisko"]);
+         $(".loginSTCPR span").text(data["loginSTCPR"]);
+         $(".awydzial span").text(data["awydzial"]);
+         $(".anrOna span").text(data["anrOna"]);
+         $(".bdataNadaniaUpowaznienia span").text(data["bdataNadaniaUpowaznienia"]);
+         $(".bnrUpowaznienia span").text(data["bnrUpowaznienia"]);
+         $(".buprawnienia span").text(data["buprawnienia"]);
+         $(".bdataWaznosciUpowaznienia span").text(data["bdataWaznosciUpowaznienia"]);
+         $(".bdataWycofaniaUpowaznienia span").text(data["bdataWycofaniaUpowaznienia"]);
+         $(".bpowodWycofaniaUpowaznienia span").text(data["bpowodWycofaniaUpowaznienia"]);
+         $(".cdataWydaniaZobowiazania span").text(data["cdataWydaniaZobowiazania"]);
+         $(".cnrZobowiazania span").text(data["cnrZobowiazania"]);
+         $(".ddataNadaniaUpowaznienia span").text(data["ddataNadaniaUpowaznienia"]);
+         $(".dnrUpowaznienia span").text(data["dnrUpowaznienia"]);
+         $(".ddataWaznosciUpowaznienia span").text(data["ddataWaznosciUpowaznienia"]);
+         $(".ddataWycofaniaUpowaznienia span").text(data["ddataWycofaniaUpowaznienia"]);
+         $(".dpowodWycofaniaUpowaznienia span").text(data["dpowodWycofaniaUpowaznienia"]);
+         $(".edataPodpisaniaUpowaznienia span").text(data["edataPodpisaniaUpowaznienia"]);
+         $(".fdataPodpisaniaZobowiazania span").text(data["fdataPodpisaniaZobowiazania"]);
+         $(".fnrUpowaznienia span").text(data["fnrUpowaznienia"]);
+         $(".fdataWaznosciUpowaznienia span").text(data["fdataWaznosciUpowaznienia"]);
+         $(".gdataZapoznaniaPolityka span").text(data["gdataZapoznaniaPolityka"]);
+         $(".hszkolenieLabi span").text(data["hszkolenieLabi"]);
+         $(".idataZapoznaniaPolityka span").text(data["idataZapoznaniaPolityka"]);
+      $("#myModal").modal('show');
+      });
+
+    }).draw();
+
+
+    });
+
+
+</script>

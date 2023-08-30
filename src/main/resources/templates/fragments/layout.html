@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" th:fragment="layout(content)">
+<meta charset="utf-8">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+  <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/css/datatables.bootstrap.min.css}">
+  <link rel="stylesheet" href="/css/select2.css" th:href="@{/css/select2.css}">
+
+<!--  <link rel="stylesheet" href="/css/font-awesome.css" th:href="@{../css/font-awesome.css}">-->
+  <link rel="stylesheet" href="/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+<!--  <link rel="stylesheet" href="/css/fontawesome.css" th:href="@{../css/fontawesome.css}">-->
+  <link rel="stylesheet" href="/css/bootstrap-toggle.min.css" th:href="@{/css/bootstrap-toggle.min.css}">
+
+  <script th:src="@{/js/jquery-3.6.0.js}"></script>
+  <script th:src="@{/js/datatables.min.js}"></script>
+  <script th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+  <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+
+  <script th:src="@{/js/select2.min.js}"></script>
+  <script th:src="@{/js/typehead.js}"></script>
+  <script th:src="@{/js/i18n/pl.js}"></script>
+
+  <script th:src="@{/js/moment.js}"></script>
+  <script th:src="@{/js/fontawesome.js}"></script>
+
+  <script th:src="@{/js/popper.min.js}"></script>
+</head>
+<body>
+<div>
+  <div th:replace="~{fragments/navbar::navbar}"></div>
+</div>
+
+<!--<div class="wrapper">-->
+  <div class="container-fluid" th:insert="${content}"></div>
+<!--</div>-->
+<div>
+  <br>
+  <br>
+
+  <div th:replace="~{fragments/footer::footer}"></div>
+</div>
+
+</body>
+</html>
+<!--<script type="text/javascript">-->
+<!--    var mess = $('#mass').val();-->
+<!--    console.log("test");-->
+<!--    console.log(mess);-->
+<!--    if (mess != 0) {-->
+<!--        console.log(mess);-->
+<!--        $('#alert').show();-->
+<!--    } else {-->
+<!--        $('#alert').hide();-->
+<!--    }-->
+<!--</script>-->
