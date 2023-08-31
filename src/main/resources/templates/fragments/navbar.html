@@ -35,6 +35,9 @@
           <td>
             <center>
               <b><span th:text="${session.test}" style="color: #0f7ae5">Niezalogowany</span></b>
+<!--              <span th:text="${#authentication.principal.firstName}"></span>-->
+              <span th:text="${#authentication.principal.authorities}"></span>
+
             </center>
           </td>
 
@@ -51,7 +54,7 @@
     </ul>
 
 
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
       <li><a href="#" th:href="@{/index}" style="color: #357abf"><span
               class="glyphicon glyphicon-home" style="color: #357abf"></span> Strona główna</a></li>
     </ul>
@@ -70,25 +73,25 @@
 <!--        </ul>-->
 <!--      </li>-->
 <!--    </ul>-->
-    <ul class="nav navbar-nav" sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+    <ul class="nav navbar-nav" >
       <li><a href="#" th:href="@{/console}" style="color: #357abf"><span
               class="glyphicon glyphicon-home" style="color: #357abf"></span> Konsole DGT</a></li>
     </ul>
-    <ul class="nav navbar-nav"sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+    <ul class="nav navbar-nav">
       <li><a href="#" th:href="@{/card}" style="color: #357abf"><span
               class="glyphicon glyphicon-home" style="color: #357abf"></span> Karty dostępowe</a></li>
     </ul>
-    <ul class="nav navbar-nav"sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+    <ul class="nav navbar-nav">
       <li><a href="#" th:href="@{/employee}" style="color: #357abf"><span
               class="fa fa-users" style="color: #357abf"></span> Pracownicy</a></li>
     </ul>
-    <ul class="nav navbar-nav" sec:authorize="hasAuthority('ADMIN')">
+    <ul class="nav navbar-nav" sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
       <li class="dropdown">
         <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="tree"
            aria-expanded="false" style="color: #357abf"><span class="glyphicon glyphicon-wrench"
                                                               style="color: #357abf"></span> Biblioteki<span class="caret"></span></a>
 
-        <ul class="dropdown-menu" sec:authorize="hasAuthority('ADMIN')">
+        <ul class="dropdown-menu">
           <li><a href="/ldap" th:href="@{/managment/account_status}" style="color: #357abf"><span
                   class="fa fa-group"></span> Statusy kont</a></li>
           <li class="divider"></li>

@@ -148,7 +148,14 @@
 		<!--			<groupId>org.springframework.boot</groupId>-->
 		<!--			<artifactId>spring-boot-starter-web</artifactId>-->
 		<!--		</dependency>-->
-		<dependency>
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+<!--		<dependency>-->
+<!--			<groupId>org.thymeleaf.extras</groupId>-->
+<!--			<artifactId>thymeleaf-extras-springsecurity4</artifactId>-->
+<!--			<version>3.0.5.RELEASE</version>-->
+<!--		</dependency>-->
+
+				<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
@@ -158,6 +165,17 @@
 			<artifactId>spring-context-support</artifactId>
 			<!--			<version>5.3.23</version>-->
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.github.jpenren</groupId>-->
+<!--			<artifactId>thymeleaf-spring-data-dialect</artifactId>-->
+<!--			<version>3.5.0</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>nz.net.ultraq.thymeleaf</groupId>-->
+<!--			<artifactId>thymeleaf-layout-dialect</artifactId>-->
+<!--			&lt;!&ndash;			<version>3.1.0</version>&ndash;&gt;-->
+<!--&lt;!&ndash;			<scope>provided</scope>&ndash;&gt;-->
+<!--		</dependency>-->
 
 		<!--		<dependency>-->
 		<!--			<groupId>log4j</groupId>-->

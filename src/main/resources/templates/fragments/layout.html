@@ -36,7 +36,9 @@
 </div>
 
 <!--<div class="wrapper">-->
-  <div class="container-fluid" th:insert="${content}"></div>
+  <div class="container-fluid" th:insert="${content}">
+    <div sec:authentication="principal.authorities"></div>
+  </div>
 <!--</div>-->
 <div>
   <br>

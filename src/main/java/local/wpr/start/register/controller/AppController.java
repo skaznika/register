@@ -82,7 +82,7 @@ public class AppController {
 //        emp.setLName(employee.getLName());
 //        emp.setDepartment(employee.setDepartment(department.getDepartmentId()).getDepartmentId());
 //        employeeServiceImpl.saveEmployee(emp);
-        return "redirect: /employee";
+        return "redirect:/employee";
     }
 
     @GetMapping("/managment/account_status")
@@ -125,7 +125,14 @@ public class AppController {
         mav.addObject("allRoles", roles);
         return mav;
     }
-
+    @PostMapping("/admin/users/save")
+    public String addUser(User user, Role role){
+        userRepository.save(user);
+//        roleRepository.save(role);
+        System.out.println("User : " + user);
+        System.out.println("Role : " + role);
+        return "redirect: index";
+    }
     @GetMapping("/admin/users/edit/{id}")
     public ModelAndView editUser(@PathVariable(name = "userId") Integer userId){
         User user = userRepository.getReferenceById(Long.valueOf(userId));
@@ -135,6 +142,8 @@ public class AppController {
         mav.addObject("allRoles", roles);
         return mav;
     }
+
+
 
     @GetMapping("/admin/uploadPage")
     public String uploadPage(){

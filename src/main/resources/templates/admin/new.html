@@ -10,7 +10,7 @@
 <body>
 <div class="container" style="width:100%">
   <h4 style="color: red; position: center">Nowy użytkownik</h4>
-  <form th:action="@{/users/save}" th:object="${user}" method="post">
+  <form th:action="@{/admin/users/save}" th:object="${user}" method="post">
     <div class="form-group">
       <label for="login" class="col-sm-2 control-label">Login : </label>
       <input class="form-control" type="text" id="login" placeholder="Wprowadź login" th:field="${user.userName}">
@@ -19,39 +19,17 @@
       <label for="name" class="col-sm-2 control-label">Login : </label>
       <input class="form-control" type="text" id="name" placeholder="Wprowadź imię i nazwisko" th:field="${user.userFullName}">
     </div>
-    <div class="form-group">
+    <div class="form-group" >
       <label for="role"> Rola w aplikacji :
         <input id="role" type="checkbox" name="roles"
                th:each = "role : ${allRoles}"
                th:text="${role.roleName}"
                th:value="${role.roleId}"
                th:field="*{roles}"
-        />
+               style="margin-left: 25px; padding-left: 25px; margin-right: 5px"/>
       </label>
     </div>
 
-<!--    <div class="col-sm-6">-->
-<!--      <label> Login-->
-<!--     <input type="text" th:field="${userName}" class="form-control">-->
-<!--      </label>-->
-<!--    </div>-->
-<!--    <div class="col-sm-6">-->
-<!--      <label> Imię i nazwisko-->
-<!--        <input type="text" th:field="${userFullName}" class="form-control">-->
-<!--      </label>-->
-<!--    </div>-->
-<!--    <p>-->
-<!--      <label>-->
-<!--        Rola w aplikacji-->
-<!--        <input type="checkbox" name="roles"-->
-<!--               th:each = "role : ${allRoles}"-->
-<!--               th:text="${role.roleName}"-->
-<!--               th:value="${role.roleId}"-->
-<!--               th:field="*{roles}"-->
-<!--               />-->
-<!--      </label>-->
-
-<!--    </p>-->
 <button type="submit" class="btn btn-primary"> Zapisz</button>
   </form>
 
