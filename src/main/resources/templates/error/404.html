@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap -->
+<!--  <link rel="stylesheet" href="<link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+  <title>404 - resource not found</title>
+</head>
+<body>
+<div class="container">
+  <h1><span class="label label-default">Strony nie znaleziono - 404</span></h1>
+
+  <p>Nie znaleziono wymaganego zasobu. Jeśli błąd będzie się powtarzał - skontaktuj się z Administratorem.</p>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <td>Timestamp</td>
+      <td th:text="${timestamp}">Timestamp</td>
+    </tr>
+    <tr>
+      <td>Path</td>
+      <td th:text="${path}">Path</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td th:text="${status}">Status</td>
+    </tr>
+    <tr>
+      <td>Error</td>
+      <td th:text="${error}">Error</td>
+    </tr>
+    <tr>
+      <td>Message</td>
+      <td th:text="${message}">Message</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

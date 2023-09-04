@@ -11,7 +11,7 @@
 <div class="container" style="width:90%">
     <center><h4 style="color: red; position: center">Wykaz upoważnień</h4></center>
 
-    <p><a href="#" class="btn btn-success"><span class="fa fa-plus-circle" aria-hidden="true"></span> Dodaj upoważnienie</a></p>
+    <p><a href="#" class="btn btn-success" id="dodaj1"><span class="fa fa-plus-circle" aria-hidden="true"></span> Dodaj upoważnienie</a></p>
     <table class="table table-striped" style="width: 100%" id="glowna">
         <thead>
         <tr>
@@ -71,10 +71,10 @@
                                 <tr>
 <!--                                    <tr>-->
                                     <td><div class="bdataNadaniaUpowaznienia">Data nadania upoważnienia: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></div>
-                                    <div class="input-group">
-                                        <input type="text">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </div>
+<!--                                    <div class="input-group">-->
+<!--                                        <input type="text">-->
+<!--                                        <span class="glyphicon glyphicon-calendar"></span>-->
+<!--                                    </div>-->
 <!--                                        <input type="text">-->
                                     </td>
 
@@ -201,14 +201,14 @@
                                     <label style="color: red">Nazwa profilu*</label>
 <!--                                    <input type="text" class="form-control" th:field="*{profileName}" required>-->
                                 </div>
-                                <div class="col-sm">
-                                    <label>Kolejka</label>
-<!--                                    <input type="text" class="form-control" th:field="*{queueIndex}">-->
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>Kod awaryjnego odblokowania</label>
-<!--                                    <input type="text" class="form-control" th:field="*{emergencyUnlockCode}">-->
-                                </div>
+<!--                                <div class="col-sm">-->
+<!--                                    <label>Kolejka</label>-->
+<!--&lt;!&ndash;                                    <input type="text" class="form-control" th:field="*{queueIndex}">&ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="col-sm-6">-->
+<!--                                    <label>Kod awaryjnego odblokowania</label>-->
+<!--&lt;!&ndash;                                    <input type="text" class="form-control" th:field="*{emergencyUnlockCode}">&ndash;&gt;-->
+<!--                                </div>-->
                                 <!--                <div class="col-sm-6">-->
                                 <!--                  <label>Login ST CPR</label>-->
                                 <!--                  <input type="text" class="form-control" th:field="*{loginStcpr}">-->
@@ -419,4 +419,7 @@
     });
 
 
+    $('#dodaj1').on('click', function (){
+        $('#add_modal').modal('show');
+    })
 </script>

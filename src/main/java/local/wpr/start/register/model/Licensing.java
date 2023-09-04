@@ -18,6 +18,7 @@ public class Licensing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long licensingId;
     private String licensingNr;
+    private boolean active;
     //data nadania upoważnienia
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String licensingSendingDate;

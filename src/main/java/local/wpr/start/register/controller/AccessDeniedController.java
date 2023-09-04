@@ -10,6 +10,6 @@ public class AccessDeniedController {
     private static final Logger logger = LoggerFactory.getLogger(AccessDeniedController.class);
     @GetMapping("/access-denied")
     public String getAccessDenied() {
-        return "/error/accessDenied";
+        return "403";
     }
 }
