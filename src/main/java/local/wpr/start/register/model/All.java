@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Klasa odpowiedzialna za wszystkie rekordy
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
