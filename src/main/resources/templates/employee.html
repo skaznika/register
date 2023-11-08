@@ -4,6 +4,7 @@
       th:replace="~{fragments/layout::layout(~{::.container})}">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
   <link rel="stylesheet" href="/css/datatables.bootstrap.min.css" th:href="@{/bootstrap/css/datatables.bootstrap.min.css}">
   <link rel="stylesheet" href="/css/select2.css" th:href="@{/css/select2.css}">
@@ -122,6 +123,79 @@
     </div>
   </div>
   <!--  end modal-->
+
+  <!-- Modal -->
+  <div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Dodawanie osoby</h4>
+          <h8 style="color: red">UWAGA: obowiązkowo wypełnij pola oznaczone *</h8>
+        </div>
+        <div class="modal-body">
+          <form class="form" style="margin: auto" th:object="${employee}" th:action="@{/managment/update_employee}" method="post">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <div class="col-sm-6">
+                  <label style="color: red">Imię*</label>
+                  <input type="text" class="form-control" th:field="*{fName}" required>
+                </div>
+                <div class="col-sm-6">
+                  <label style="color: red">Nazwisko*</label>
+                  <input type="text" class="form-control" th:field="*{lName}" required>
+                </div>
+                <div class="col-sm">
+                  <label>Nr ONA</label>
+                  <input type="text" class="form-control" th:field="*{onaNr}">
+                </div>
+                <div class="col-sm-6">
+                  <label>Archiwalny Nr ONA</label>
+                  <input type="text" class="form-control" th:field="*{archiveOnaNr}">
+                </div>
+                <div class="col-sm-6">
+                  <label>Login ST CPR</label>
+                  <input type="text" class="form-control" th:field="*{loginStcpr}">
+                </div>
+                <br>
+<!--                <div class="col-sm">-->
+<!--                  <label>Status konta</label>-->
+<!--                  <select class="form-control" id="account_status" style="width:100%"></select>-->
+<!--                </div>-->
+<!--                <br>-->
+<!--                <div class="col-sm">-->
+<!--                  <label style="color: red">Zatrudniony w: * </label>-->
+<!--                  <select class="form-control" id="department" style="width: 100%" required></select>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                <div class="col-sm">&ndash;&gt;-->
+<!--                &lt;!&ndash;                  <label>Przypisany do grupy </label>&ndash;&gt;-->
+<!--                &lt;!&ndash;                  <select class="form-control" id="group" style="width: 100%" required></select>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                <div class="col-sm">-->
+<!--                  <label>Znajomość języka </label>-->
+<!--                  <select class="form-control" id="language" style="width: 100%" ></select>-->
+<!--                </div>-->
+<!--              </div>-->
+              <div class="panel-footer" align="right">
+                <button class="btn btn-success" style="align: right" id="save_upload_employee"><i class="fa fa-save"></i> Zapisz</button>
+              </div>
+            </div>
+<!--            <input th:field="*{accountStatus.accountStatusId}" id="accountId" hidden>-->
+<!--            <input th:field="*{department.departmentId}" id="departmentId" hidden>-->
+<!--            <input th:field="*{language.languageId}" id="languageId" hidden>-->
+            <!--            <div class="col-sm-12" align="right">-->
+            <!--            <button class="btn btn-success" style="align: right"><i class="fa fa-save"></i> Zapisz</button>-->
+            <!--            </div>-->
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Zamknij</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  end modal-->
 </div>
 <!--</div>-->
 </body>
@@ -218,6 +292,12 @@
         cell.innerHTML = i + 1;
       });
     }).draw();
+
+$('#glowna tbody').on('click', '#edit', function (){
+  var data = table.row($(this).parents('tr')).data();
+  alert("Id: " + data["employeeId"]);
+
+});
 
 <!--funkcja status konta-->
     $(function () {
@@ -332,6 +412,11 @@
     $('#add').on('click', function(){
     $("#add_modal").modal('show');
     });
+
+    // $('#edit').on('click', function (){
+    //   // $('#edit_modal').modal('show');
+    //   alert("Edit click");
+    // });
     })
 
 
