@@ -36,15 +36,15 @@
           <h4 class="modal-title">Szczegóły</h4>
         </div>
         <div class="modal-body">
-          <!--                    <div class="productName"><p>Nazwa sprzętu/artykułu: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="productDesc"><p>Dodatkowe informacje dot. sprzętu: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="branchFullName"><p>Lokalizacja: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="branchRoomName"><p>Pomieszczenie: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="fullName"><p>Przypisana osoba: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="trustmenName"><p>Rodzaj własności: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="trustmentDesc"><p>Własność: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="contractName"><p>Nr umowy: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
-          <!--                    <div class="contractNrEzd"><p>Liczba z EZD: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
+                              <div class="fName"><p>Imię: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="lName"><p>Nazwisko: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="login_stcpr"><p>Login STCPR: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="cardNr"><p>Nr karty: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="cardPin"><p>Pin do karty: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="releaseDate"><p>Data wydania: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="returnDate"><p>Data zwrotu: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="cardDesc"><p>Dodatkowe informacje: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
+                              <div class="cardActive"><p> &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>
           <!--                    <div class="articleQueantity"><p>Ilość: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
           <!--                    <div class="productPrice"><p>Wartość: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
           <!--                    <div class="serialInvoice"><p>Nr inwentarzowy: &nbsp;&nbsp;<span style="color: #002a80; font-weight: bold"></span></p></div>-->
@@ -131,7 +131,23 @@
         cell.innerHTML = i + 1;
       });
     }).draw();
+
+    $('#glowna tbody').on('click', '#details', function (){
+      var data = table.row($(this).parents('tr')).data();
+      $(".modal-body div span").text("");
+      $(".fName span").text(data["fname"]);
+      $(".lName span").text(data["lname"]);
+      $(".login_stcpr span").text(data["login_stcpr"]);
+      $(".cardNr span").text(data["cardNr"]);
+      $(".cardPin span").text(data["cardPin"]);
+      $(".releaseDate span").text(data["releaseDate"]);
+      $(".returnDate span").text(data["returnDate"]);
+      $(".cardDesc span").text(data["cardDesc"]);
+      $('#myModal').modal('show');
+    });
     })
+
+
 
 
 </script>
